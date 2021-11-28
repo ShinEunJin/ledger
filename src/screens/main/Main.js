@@ -1,15 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 import Insert from '../insert/Insert'
 
 const Main = () => {
+
+    const amount = useSelector(state => state.amount.value)
+
     return (
         <View style={styles.container}>
             <View>
                 <Text style={styles.titleStyle}>이번 달 지출은?</Text>
             </View>
             <View>
-                <Text style={styles.amountStyle}>10000 + 10000</Text>
+                <Text style={styles.amountStyle}>{amount}</Text>
             </View>
             <Insert />
         </View>

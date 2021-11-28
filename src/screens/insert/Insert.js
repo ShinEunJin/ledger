@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 const Insert = () => {
 
+    const dispatch = useDispatch()
+
     const [value, setValue] = useState()
+
+    const onSubmitInput = () => {
+        dispatch()
+    }
 
     return (
         <View style={styles.container}>
@@ -13,6 +20,9 @@ const Insert = () => {
                 style={styles.inputStyle}
                 keyboardType="numeric"
             />
+            <Pressable style={{ backgroundColor: '#000', width: 30, height: 30 }} onPress={onSubmitInput}>
+                <Text>등록</Text>
+            </Pressable>
         </View>
     )
 }
