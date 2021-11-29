@@ -1,11 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { useSelector } from 'react-redux'
-import Calculate from '../calculate/Calculate'
 
 const Main = () => {
-
-    const amount = useSelector(state => state.amount.value)
 
     return (
         <View style={styles.container}>
@@ -13,9 +9,8 @@ const Main = () => {
                 <Text style={styles.titleStyle}>이번 달 지출은?</Text>
             </View>
             <View>
-                <Text style={styles.amountStyle}>{amount}</Text>
+                <Text style={styles.amountStyle}>787</Text>
             </View>
-            <Calculate />
         </View>
     )
 }
