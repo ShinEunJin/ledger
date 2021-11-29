@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import Insert from '../insert/Insert'
+import Calculate from '../calculate/Calculate'
 
 const Main = () => {
 
@@ -15,7 +15,7 @@ const Main = () => {
             <View>
                 <Text style={styles.amountStyle}>{amount}</Text>
             </View>
-            <Insert />
+            <Calculate />
         </View>
     )
 }
