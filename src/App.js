@@ -1,18 +1,14 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Provider } from 'react-redux'
 
-import MainScreen from './screens/main/Main'
-
-const Stack = createNativeStackNavigator()
+import store from "./modules"
+import RootNavigation from './navigations/RootNavigation'
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={MainScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Provider store={store}>
+            <RootNavigation />
+        </Provider>
     )
 }
 
