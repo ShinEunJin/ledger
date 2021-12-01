@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { add, reset } from '../../modules/calculate'
 
@@ -10,13 +11,40 @@ const Main = () => {
     const calculate = useSelector(state => state.calculate)
 
     const [amount, setAmount] = useState("")
+    const [name, setName] = useState("")
 
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        getStorage()
+    }, [])
+
+    const setStorage = async () => {
+        try {
+            let value = JSON.stringify({ name, amount: Number(amount) })
+            await AsyncStorage.setItem('ledger', value)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getStorage = async () => {
+        try {
+            let value = await AsyncStorage.getItem('ledger')
+            if (value !== null) {
+                console.log(JSON.parse(value))
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const onAddAmount = async () => {
-        const { data } = await axios.post("https://shin.loca.lt/api/ledger", { user: "shin-tester3", list: { name: "test", amount: Number(amount) } })
+        // const { data } = await axios.post("https://shin.loca.lt/api/ledger", { user: "shin-tester3", list: { name: "test", amount: Number(amount) } })
         dispatch(add(Number(amount)))
         setAmount("")
+        setName("")
+        setStorage()
     }
 
     const onResetAmount = () => {
@@ -36,6 +64,15 @@ const Main = () => {
                 keyboardType="numeric"
                 onChangeText={setAmount}
                 value={amount}
+                placeholder="가격"
+                placeholderTextColor="black"
+            />
+            <TextInput
+                style={styles.inputStyle}
+                onChangeText={setName}
+                value={name}
+                placeholder="제목"
+                placeholderTextColor="black"
             />
             <Pressable style={styles.inputBtn} onPress={onAddAmount}>
                 <Text style={styles.inputBtnText}>추가</Text>
