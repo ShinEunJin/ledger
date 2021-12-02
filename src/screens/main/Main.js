@@ -20,12 +20,10 @@ const Main = () => {
   }, []);
 
   const setStorage = async () => {
-    const list = [];
     try {
       let value = {name, amount: Number(amount)};
+      await AsyncStorage.setItem('ledger', JSON.stringify([...ledger, value]));
       setLedger([...ledger, value]);
-      console.log('ledger', ledger);
-      await AsyncStorage.setItem('ledger', JSON.stringify(ledger));
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +34,7 @@ const Main = () => {
       let value = await AsyncStorage.getItem('ledger');
       setLedger(JSON.parse(value));
       if (value !== null) {
-        console.log(JSON.parse(value));
+        console.log('getStorage ledger', JSON.parse(value));
       }
     } catch (error) {
       console.log(error);
