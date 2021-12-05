@@ -16,6 +16,12 @@ export const listSlice = createSlice({
     insert: (state, action) => {
       state.push(action.payload);
     },
+    remove: (state, action) => {
+      state.splice(
+        state.findIndex(item => item.id === action.payload),
+        1,
+      );
+    },
   },
   extraReducers: builder => {
     builder.addCase(setListAsyncStorage.fulfilled, (state, action) => {
@@ -24,6 +30,6 @@ export const listSlice = createSlice({
   },
 });
 
-export const {insert} = listSlice.actions;
+export const {insert, remove} = listSlice.actions;
 
 export default listSlice.reducer;

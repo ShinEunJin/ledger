@@ -1,15 +1,26 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {shallowEqual, useSelector} from 'react-redux';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {remove} from '../../redux/list';
 
 const List = () => {
+  const dispatch = useDispatch();
   const list = useSelector(({list}) => list, shallowEqual);
+
+  const onRemoveItem = id => {
+    dispatch(remove(id));
+  };
 
   const renderItem = ({item}) => {
     return (
       <View style={styles.listBox}>
         <Text style={[styles.listText]}>{item.title}</Text>
         <Text style={[styles.listText]}>{item.amount}</Text>
+        <Pressable
+          style={{padding: 2, backgroundColor: 'gray'}}
+          onPress={() => onRemoveItem(item.id)}>
+          <Text>삭제</Text>
+        </Pressable>
       </View>
     );
   };

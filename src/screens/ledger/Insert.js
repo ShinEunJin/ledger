@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import dayjs from 'dayjs';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {insert, setListAsyncStorage} from '../../redux/list';
+import {insert} from '../../redux/list';
 
 const Insert = () => {
   const dispatch = useDispatch();
@@ -39,8 +38,6 @@ const Insert = () => {
 
   const onCheck = async () => {
     console.log('storeList', storeList);
-    const test = await AsyncStorage.getItem('ledger');
-    console.log('asyncStorage', test);
   };
 
   return (
