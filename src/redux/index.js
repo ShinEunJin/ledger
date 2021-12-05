@@ -1,11 +1,9 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers} from 'redux';
 
 import calculate from './calculate';
 import list from './list';
 
-export default configureStore({
-  reducer: {
-    calculate,
-    list,
-  },
+export default rootReducer = combineReducers({
+  calculate,
+  list,
 });

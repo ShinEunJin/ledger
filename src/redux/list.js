@@ -1,4 +1,13 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const setListAsyncStorage = createAsyncThunk(
+  'list/setListAsyncStorage',
+  async body => {
+    const {data} = await AsyncStorage.setItem('ledger', body);
+    return data;
+  },
+);
 
 export const listSlice = createSlice({
   name: 'list',
@@ -7,6 +16,11 @@ export const listSlice = createSlice({
     insert: (state, action) => {
       state.push(action.payload);
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(setListAsyncStorage.fulfilled, (state, action) => {
+      state.push(action.payload);
+    });
   },
 });
 

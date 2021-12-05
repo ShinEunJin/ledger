@@ -12,12 +12,9 @@ export const calculateSlice = createSlice({
     add: (state, action) => {
       state.amount += action.payload;
     },
-    reset: state => {
-      state.amount = 0;
-    },
   },
 });
 
-export const {add, reset} = calculateSlice.actions;
+export const {add} = calculateSlice.actions;
 
 export default calculateSlice.reducer;
