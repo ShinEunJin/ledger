@@ -45,6 +45,7 @@ const Calendar = () => {
   const [selectedDay, setSelectedDay] = useState('');
 
   const onSelectDay = day => {
+    console.log(day);
     setSelectedDay(selectedDay === day ? '' : day);
   };
 
@@ -66,11 +67,34 @@ const Calendar = () => {
           [selectedDay]: {selected: true},
         }}
       />
-      <Text style={{color: 'black'}}>
-        {selectedDay === '' ? dayjs().format('YYYY-MM-DD') : selectedDay}
-      </Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.titleStyle}>
+          {selectedDay === ''
+            ? dayjs().format('YYYY년 MM월 DD일')
+            : selectedDay.replace(/\-/, '년 ').replace(/\-/, '월 ')}
+          일
+        </Text>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  infoContainer: {
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#000',
+    paddingVertical: 20,
+    width: '80%',
+    marginTop: 30,
+    marginHorizontal: '10%',
+  },
+  titleStyle: {
+    color: '#000',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+});
 
 export default Calendar;
