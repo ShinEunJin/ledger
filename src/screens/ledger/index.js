@@ -1,14 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Calendar from './Calendar';
 
-import Insert from './Insert';
-import List from './List';
+import {G_backgroundColor} from '../../global';
 
 const Ledger = () => {
   return (
     <View style={styles.container}>
-      <Insert />
-      <List />
+      <Calendar />
     </View>
   );
 };
@@ -16,7 +15,7 @@ const Ledger = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAEDF0',
+    backgroundColor: G_backgroundColor,
   },
   titleStyle: {
     color: '#000',
