@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/core';
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {remove} from '../../redux/list';
+import {remove} from '../../../redux/list';
 
-const List = () => {
+const List = ({day}) => {
   const dispatch = useDispatch();
-  const list = useSelector(({list}) => list, shallowEqual);
+  const list = useSelector(
+    ({list}) => list.filter(item => item[day]),
+    shallowEqual,
+  );
 
   const onRemoveItem = id => {
     dispatch(remove(id));
   };
 
   const renderItem = ({item}) => {
+    let filteredItem = item[day];
     return (
       <View style={styles.listBox}>
-        <Text style={[styles.listText]}>{item.title}</Text>
-        <Text style={[styles.listText]}>{item.amount}</Text>
+        <Text style={[styles.listText]}>{filteredItem.title}</Text>
+        <Text style={[styles.listText]}>{filteredItem.amount}</Text>
         <Pressable
           style={{padding: 2, backgroundColor: 'gray'}}
-          onPress={() => onRemoveItem(item.id)}>
+          onPress={() => onRemoveItem(filteredItem.id)}>
           <Text>삭제</Text>
         </Pressable>
       </View>
@@ -38,7 +43,6 @@ const List = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginHorizontal: '10%',
   },
   listBox: {

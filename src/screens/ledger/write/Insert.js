@@ -11,9 +11,9 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import dayjs from 'dayjs';
 
-import {insert} from '../../redux/list';
+import {insert} from '../../../redux/list';
 
-const Insert = () => {
+const Insert = ({day}) => {
   const dispatch = useDispatch();
   const storeList = useSelector(({list}) => list);
 
@@ -27,9 +27,11 @@ const Insert = () => {
     else if (amount.replace(/ /g, '') === '')
       return Alert.alert('금액 입력란 적어주세요');
     let payload = {
-      id,
-      title,
-      amount: Number(amount),
+      [day]: {
+        id,
+        title,
+        amount: Number(amount),
+      },
     };
     dispatch(insert(payload));
     setTitle('');
@@ -62,11 +64,11 @@ const Insert = () => {
           <Text style={{color: '#EADEDE'}}>확인</Text>
         </Pressable>
       </View>
-      <View style={{width: '70%'}}>
+      {/* <View style={{width: '70%'}}>
         <Pressable style={styles.submitBoxStyle} onPress={onCheck}>
           <Text style={{color: '#EADEDE'}}>체크</Text>
         </Pressable>
-      </View>
+      </View> */}
     </Pressable>
   );
 };

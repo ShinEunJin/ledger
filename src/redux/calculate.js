@@ -1,11 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-let id = 1;
-
 export const calculateSlice = createSlice({
   name: 'calculate',
   initialState: {
-    id: id++,
     amount: 0,
   },
   reducers: {

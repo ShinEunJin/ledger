@@ -4,9 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Main from '../screens/main/Main';
 import Ledger from '../screens/ledger';
+import Write from '../screens/ledger/write';
 
 export const MAIN = 'Main';
-export const LEDGER = 'Ledger';
+export const LEDGER = 'LEDGER';
+export const LEDGER_WRITE = 'LEDGER_WRITE';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +27,7 @@ const RootNavigation = () => {
           component={Ledger}
           options={{title: '가계부'}}
         />
+        <Stack.Screen name={LEDGER_WRITE} component={Write} />
       </Stack.Navigator>
     </NavigationContainer>
   );

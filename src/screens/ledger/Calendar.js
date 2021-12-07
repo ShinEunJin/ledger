@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Calendar as Calendars, LocaleConfig} from 'react-native-calendars';
 import dayjs from 'dayjs';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {G_backgroundColor} from '../../global';
-
+import {LEDGER_WRITE} from '../../navigations/RootNavigation';
 LocaleConfig.locales['kr'] = {
   monthNames: [
     '1월',
@@ -42,12 +43,19 @@ LocaleConfig.locales['kr'] = {
 LocaleConfig.defaultLocale = 'kr';
 
 const Calendar = () => {
+  const navigation = useNavigation();
+
   const [selectedDay, setSelectedDay] = useState('');
 
   const onSelectDay = day => {
-    console.log(day);
     setSelectedDay(selectedDay === day ? '' : day);
   };
+
+  // useFocusEffect(
+  //   useCallback(() => {
+
+  //   }, [selectedDay]),
+  // );
 
   return (
     <View>
@@ -71,9 +79,20 @@ const Calendar = () => {
         <Text style={styles.titleStyle}>
           {selectedDay === ''
             ? dayjs().format('YYYY년 MM월 DD일')
-            : selectedDay.replace(/\-/, '년 ').replace(/\-/, '월 ')}
-          일
+            : dayjs(selectedDay).format('YYYY년 MM월 DD일')}
         </Text>
+      </View>
+      <View style={styles.infoContainer}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate(LEDGER_WRITE, {
+              day:
+                selectedDay === '' ? dayjs().format('YYYY-MM-DD') : selectedDay,
+            })
+          }
+          style={{backgroundColor: 'black', width: 50, height: 50}}>
+          <Text>작성</Text>
+        </Pressable>
       </View>
     </View>
   );
