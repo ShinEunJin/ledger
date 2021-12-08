@@ -1,7 +1,7 @@
-import React, {useCallback, useState} from 'react';
-import {useFocusEffect} from '@react-navigation/core';
+import React from 'react';
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+
 import {remove} from '../../../redux/list';
 
 const List = ({day}) => {
@@ -14,6 +14,16 @@ const List = ({day}) => {
   const onRemoveItem = id => {
     dispatch(remove(id));
   };
+
+  const getSum = () => {
+    let sum = 0;
+    const result = list.forEach(item => {
+      sum += Number(item[day].amount);
+    });
+    console.log(sum);
+  };
+
+  getSum();
 
   const renderItem = ({item}) => {
     let filteredItem = item[day];

@@ -38,10 +38,6 @@ const Insert = ({day}) => {
     setAmount('');
   };
 
-  const onCheck = async () => {
-    console.log('storeList', storeList);
-  };
-
   return (
     <Pressable style={styles.container} onPress={Keyboard.dismiss}>
       <TextInput
@@ -64,11 +60,6 @@ const Insert = ({day}) => {
           <Text style={{color: '#EADEDE'}}>확인</Text>
         </Pressable>
       </View>
-      {/* <View style={{width: '70%'}}>
-        <Pressable style={styles.submitBoxStyle} onPress={onCheck}>
-          <Text style={{color: '#EADEDE'}}>체크</Text>
-        </Pressable>
-      </View> */}
     </Pressable>
   );
 };
