@@ -4,12 +4,12 @@ export const calculateSlice = createSlice({
   name: 'calculate',
   initialState: [],
   reducers: {
-    checkDay: (state, action) => {
-      state.push(state.find(action.payload) ? action.payload : '');
+    setSumByDay: (state, action) => {
+      state.day = action.payload;
     },
   },
 });
 
-export const {checkDay} = calculateSlice.actions;
+export const {setSumByDay} = calculateSlice.actions;
 
 export default calculateSlice.reducer;

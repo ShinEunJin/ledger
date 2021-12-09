@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import {Calendar as Calendars, LocaleConfig} from 'react-native-calendars';
-import dayjs from 'dayjs';
-import {useNavigation} from '@react-navigation/native';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 
 import {G_backgroundColor} from '../global';
-import {LEDGER_WRITE} from '../navigations/RootNavigation';
 import {setDay} from '../redux/calendar';
 
 LocaleConfig.locales['kr'] = {
@@ -46,7 +43,6 @@ LocaleConfig.locales['kr'] = {
 LocaleConfig.defaultLocale = 'kr';
 
 const Calendar = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {day} = useSelector(state => state.calendar, shallowEqual);
 

@@ -1,7 +1,6 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import dayjs from 'dayjs';
 import {StyleSheet, Text, View} from 'react-native';
-import {useSelector, shallowEqual} from 'react-redux';
 
 import Insert from './Insert';
 import List from './List';
@@ -11,6 +10,12 @@ const index = ({
     params: {day},
   },
 }) => {
+  const [sum, setSum] = useState(0);
+
+  const updateSum = amount => {
+    setSum(amount);
+  };
+
   return (
     <View>
       <Insert day={day} />
@@ -19,7 +24,8 @@ const index = ({
           {dayjs(day).format('YYYY년 MM월 DD일')}
         </Text>
       </View>
-      <List day={day} />
+      <Text style={{color: '#000'}}>총 합 {sum}</Text>
+      <List updateSum={updateSum} day={day} />
     </View>
   );
 };

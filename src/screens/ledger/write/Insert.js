@@ -12,11 +12,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import dayjs from 'dayjs';
 
 import {insert} from '../../../redux/list';
-import {add} from '../../../redux/calculate';
 
 const Insert = ({day}) => {
   const dispatch = useDispatch();
-  const storeList = useSelector(({list}) => list);
 
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
