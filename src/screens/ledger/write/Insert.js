@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import dayjs from 'dayjs';
 
 import {insert} from '../../../redux/list';
+import {add} from '../../../redux/calculate';
 
 const Insert = ({day}) => {
   const dispatch = useDispatch();
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
     alignItems: 'center',
-    marginBottom: 40,
   },
   inputStyle: {
     backgroundColor: '#fff',

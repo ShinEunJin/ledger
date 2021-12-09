@@ -15,21 +15,16 @@ const List = ({day}) => {
     dispatch(remove(id));
   };
 
-  const getSum = () => {
-    let sum = 0;
-    const result = list.forEach(item => {
-      sum += Number(item[day].amount);
-    });
-    console.log(sum);
-  };
-
-  getSum();
-
   const renderItem = ({item}) => {
     let filteredItem = item[day];
     return (
       <View style={styles.listBox}>
-        <Text style={[styles.listText]}>{filteredItem.title}</Text>
+        <Text style={[styles.listText]}>
+          {filteredItem.title}
+          <Pressable>
+            <Text style={{color: '#000'}}>...</Text>
+          </Pressable>
+        </Text>
         <Text style={[styles.listText]}>{filteredItem.amount}</Text>
         <Pressable
           style={{padding: 2, backgroundColor: 'gray'}}
@@ -62,6 +57,7 @@ const styles = StyleSheet.create({
   listText: {
     color: '#000',
     marginRight: 10,
+    width: '20%',
   },
 });
 
