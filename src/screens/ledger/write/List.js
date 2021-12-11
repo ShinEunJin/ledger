@@ -13,10 +13,6 @@ const List = ({day, updateSum}) => {
   );
 
   const setSumToStorage = async amount => {
-    if (!amount) {
-      console.log('null', typeof null);
-      return;
-    }
     await storage.setSumByDay(day.toString(), amount.toString());
   };
 
