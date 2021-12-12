@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, Pressable, StyleSheet, Text, View} from 'react-native';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {useFocusEffect, useNavigation} from '@react-navigation/core';
 import dayjs from 'dayjs';
@@ -49,7 +49,9 @@ const Ledger = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../assets/img/img4.jpg')}
+      style={{flex: 1}}>
       <Calendar />
       <View style={styles.infoContainer}>
         <View>
@@ -79,7 +81,11 @@ const Ledger = () => {
               </Text>
             </View>
             <View style={{paddingLeft: 20}}>
-              <Text style={[styles.textStyle, {fontWeight: '600'}]}>
+              <Text
+                style={[
+                  styles.textStyle,
+                  {fontWeight: '600', color: '#F90716'},
+                ]}>
                 {$numeral(totalSum).format('0,0')
                   ? $numeral(totalSum).format('0,0')
                   : 0}
@@ -97,7 +103,14 @@ const Ledger = () => {
               <Text style={styles.textStyle}>당일 지출</Text>
             </View>
             <View style={{paddingLeft: 20}}>
-              <Text style={[styles.textStyle, {fontWeight: '600'}]}>
+              <Text
+                style={[
+                  styles.textStyle,
+                  {
+                    fontWeight: '600',
+                    color: !sum || sum === '0' ? '#000' : '#F58840',
+                  },
+                ]}>
                 {$numeral(sum).format('0,0') ? $numeral(sum).format('0,0') : 0}
               </Text>
             </View>
@@ -119,20 +132,15 @@ const Ledger = () => {
           <Text style={styles.textStyle}>작성</Text>
         </Pressable>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: G_backgroundColor,
-  },
   infoContainer: {
     flex: 1,
     paddingHorizontal: 30,
     paddingTop: 20,
-    backgroundColor: '#F7F7F7',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

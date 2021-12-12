@@ -58,21 +58,17 @@ const Calendar = () => {
   let array = [];
   let array2 = [];
 
-  list.filter(item => array.push(Object.keys(item)));
-
-  array = [...new Set(array.map(item => item[0]))];
-
-  for (let i = 0; i < array.length; i++) {
-    let temp = new Object();
-    temp[array[i]] = {marked: true, dotColor: 'red'};
-    array2.push(temp);
+  for (let i = 0; i < list.length; i++) {
+    array.push(Object.keys(list[i]));
   }
 
   let object = {};
-  for (let i = 0; i < array2.length; i++) {
-    object = {hi: array2[i]};
+
+  let markedList = [...new Set(array.map(item => item[0]))];
+
+  for (let i = 0; i < markedList.length; i++) {
+    object[markedList[i]] = {marked: true, dotColor: 'red'};
   }
-  console.log(object);
 
   return (
     <View>
@@ -88,8 +84,8 @@ const Calendar = () => {
         onDayPress={day => dispatch(setDay(day.dateString))}
         monthFormat={'yyyy년 MMM'}
         markedDates={{
-          [day]: {selected: true},
           ...object,
+          [day]: {selected: true},
         }}
       />
     </View>

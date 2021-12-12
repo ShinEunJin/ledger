@@ -1,22 +1,26 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {Pressable, View, Text, StyleSheet, ImageBackground} from 'react-native';
 
 import {G_backgroundColor} from '../../global';
 
 import {LEDGER} from '../../navigations/RootNavigation';
+import Snow from '../../components/Snow';
 
 const Main = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../assets/img/img1.jpg')}
+      style={styles.container}>
+      <Snow />
       <Pressable
         style={styles.selectBox}
         onPress={() => navigation.navigate(LEDGER)}>
         <Text style={styles.selectText}>가계부</Text>
       </Pressable>
-    </View>
+    </ImageBackground>
   );
 };
 
