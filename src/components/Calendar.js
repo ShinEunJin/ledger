@@ -5,6 +5,7 @@ import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 
 import {G_backgroundColor} from '../global';
 import {setDay} from '../redux/calendar';
+import list from '../redux/list';
 
 LocaleConfig.locales['kr'] = {
   monthNames: [
@@ -44,7 +45,34 @@ LocaleConfig.defaultLocale = 'kr';
 
 const Calendar = () => {
   const dispatch = useDispatch();
-  const {day} = useSelector(state => state.calendar, shallowEqual);
+  const {day} = useSelector(({calendar}) => calendar, shallowEqual);
+  const list = useSelector(
+    ({list}) =>
+      list.filter(
+        item =>
+          String(Object.keys(item)).substring(5, 7) === day.substring(5, 7),
+      ),
+    shallowEqual,
+  );
+
+  let array = [];
+  let array2 = [];
+
+  list.filter(item => array.push(Object.keys(item)));
+
+  array = [...new Set(array.map(item => item[0]))];
+
+  for (let i = 0; i < array.length; i++) {
+    let temp = new Object();
+    temp[array[i]] = {marked: true, dotColor: 'red'};
+    array2.push(temp);
+  }
+
+  let object = {};
+  for (let i = 0; i < array2.length; i++) {
+    object = {hi: array2[i]};
+  }
+  console.log(object);
 
   return (
     <View>
@@ -59,9 +87,9 @@ const Calendar = () => {
         }}
         onDayPress={day => dispatch(setDay(day.dateString))}
         monthFormat={'yyyy년 MMM'}
-        markingType={'multi-dot'}
         markedDates={{
           [day]: {selected: true},
+          ...object,
         }}
       />
     </View>
