@@ -14,12 +14,12 @@ const Main = () => {
     <ImageBackground
       source={require('../../assets/img/img1.jpg')}
       style={styles.container}>
-      <Snow />
       <Pressable
         style={styles.selectBox}
         onPress={() => navigation.navigate(LEDGER)}>
         <Text style={styles.selectText}>가계부</Text>
       </Pressable>
+      <Snow />
     </ImageBackground>
   );
 };
