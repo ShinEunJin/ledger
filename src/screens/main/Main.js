@@ -12,14 +12,16 @@ const Main = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/img/img1.jpg')}
-      style={styles.container}>
-      <Pressable
-        style={styles.selectBox}
-        onPress={() => navigation.navigate(LEDGER)}>
-        <Text style={styles.selectText}>가계부</Text>
-      </Pressable>
+      style={{flex: 1}}
+      source={require('../../assets/img/img1.jpg')}>
       <Snow />
+      <View style={styles.container}>
+        <Pressable
+          style={styles.selectBox}
+          onPress={() => navigation.navigate(LEDGER)}>
+          <Text style={styles.selectText}>가계부</Text>
+        </Pressable>
+      </View>
     </ImageBackground>
   );
 };
@@ -29,7 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingTop: 50,
-    backgroundColor: G_backgroundColor,
   },
   selectBox: {
     borderRadius: 15,

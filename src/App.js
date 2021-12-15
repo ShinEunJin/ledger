@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PersistGate} from 'redux-persist/integration/react';
 import {configureStore} from '@reduxjs/toolkit';
 
+import './global';
 import rootReducer from './redux';
 import RootNavigation from './navigations/RootNavigation';
 
