@@ -1,62 +1,34 @@
-import {useFocusEffect} from '@react-navigation/core';
-import React, {useRef, useCallback, useEffect} from 'react';
-import {StyleSheet, View, Animated} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Dimensions} from 'react-native';
+import SnowAnim from './SnowAnim';
 
 const Snow = () => {
-  const snowAnim = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
+  const screenWidth = Dimensions.get('screen').width;
 
-  const snowing = () => {
-    return Animated.timing(snowAnim, {
-      toValue: {x: 60, y: 300},
-      duration: 15000,
-      useNativeDriver: true,
-    });
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      Animated.loop(snowing()).start();
-    }, []),
-  );
+  const [arr, setArr] = useState([]);
+  useEffect(() => {
+    let array = [];
+    for (let i = 0; i < 100; i++) {
+      let temp = {
+        px: Math.floor(Math.random() * 100),
+        py: 1200,
+        time: Math.floor(Math.random() * 8000) + 10000,
+        positionLeft: Math.floor(Math.random() * screenWidth),
+        delayTime: Math.floor(Math.random() * 10000),
+        snowWidth: Math.floor(Math.random() * 4) + 4,
+      };
+      array.push(temp);
+    }
+    setArr(array);
+  }, []);
 
   return (
     <View>
-      <Animated.View
-        style={{
-          opacity: snowAnim.x.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
-          }),
-          transform: [
-            {
-              translateY: snowAnim.y.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, 3],
-              }),
-            },
-            {translateX: snowAnim.x},
-          ],
-        }}>
-        <View
-          style={{
-            left: 50,
-            width: 8,
-            height: 8,
-            borderRadius: 10,
-            backgroundColor: '#fff',
-          }}></View>
-      </Animated.View>
+      {arr &&
+        arr.length > 0 &&
+        arr.map((item, index) => <SnowAnim key={index} {...item} />)}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  snowEffect: {
-    idth: 10,
-    height: 10,
-    borderRadius: 10,
-    backgroundColor: '#000',
-  },
-});
 
 export default Snow;

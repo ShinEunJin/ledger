@@ -13,7 +13,7 @@ const Main = () => {
   return (
     <ImageBackground
       style={{flex: 1}}
-      source={require('../../assets/img/img1.jpg')}>
+      source={require('../../assets/img/img2.jpg')}>
       <Snow />
       <View style={styles.container}>
         <Pressable
