@@ -19,7 +19,7 @@ const SnowAnim = ({px, py, time, positionLeft, delayTime, snowWidth}) => {
   useFocusEffect(
     useCallback(() => {
       Animated.loop(snowing()).start();
-    }, []),
+    }, [snowAnim]),
   );
 
   return (
@@ -56,4 +56,4 @@ const SnowAnim = ({px, py, time, positionLeft, delayTime, snowWidth}) => {
   );
 };
 
-export default SnowAnim;
+export default React.memo(SnowAnim);
