@@ -16,11 +16,19 @@ const SnowAnim = ({px, py, time, positionLeft, delayTime, snowWidth}) => {
     ]);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      Animated.loop(snowing()).start();
-    }, [snowAnim]),
-  );
+  useEffect(() => {
+    Animated.loop(snowing()).start();
+    return () => {
+      Animated.loop(snowing()).stop();
+    };
+  }, [snowAnim]);
+
+  // useFocusEffect(
+  //   useCallback(() => {
+
+  //     Animated.loop(snowing()).start();
+  //   }, [snowAnim]),
+  // );
 
   return (
     <View>
