@@ -2,9 +2,7 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Pressable, View, Text, StyleSheet, ImageBackground} from 'react-native';
 
-import {G_backgroundColor} from '../../global';
-
-import {LEDGER} from '../../navigations/RootNavigation';
+import {CARD, LEDGER} from '../../navigations/RootNavigation';
 import Snow from '../../components/Snow';
 
 const Main = () => {
@@ -20,6 +18,11 @@ const Main = () => {
           style={styles.selectBox}
           onPress={() => navigation.navigate(LEDGER)}>
           <Text style={styles.selectText}>가계부</Text>
+        </Pressable>
+        <Pressable
+          style={styles.selectBox}
+          onPress={() => navigation.navigate(CARD)}>
+          <Text style={styles.selectText}>테스트</Text>
         </Pressable>
       </View>
     </ImageBackground>
@@ -41,6 +44,7 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20,
   },
   selectText: {
     fontSize: 18,
