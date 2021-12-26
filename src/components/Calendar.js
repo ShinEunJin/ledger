@@ -5,7 +5,6 @@ import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 
 import {G_backgroundColor} from '../global';
 import {setDay} from '../redux/calendar';
-import list from '../redux/list';
 
 LocaleConfig.locales['kr'] = {
   monthNames: [
@@ -56,7 +55,6 @@ const Calendar = () => {
   );
 
   let array = [];
-  let array2 = [];
 
   for (let i = 0; i < list.length; i++) {
     array.push(Object.keys(list[i]));
