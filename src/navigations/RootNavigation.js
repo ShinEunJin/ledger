@@ -6,12 +6,15 @@ import Main from '../screens/main/Main';
 import Ledger from '../screens/ledger';
 import Write from '../screens/ledger/write';
 import Health from '../screens/health';
+import Socket from '../screens/socket';
 
 export const MAIN = 'MAIN';
 export const LEDGER = 'LEDGER';
 export const LEDGER_WRITE = 'LEDGER_WRITE';
 
 export const HEALTH = 'HEALTH';
+
+export const SOCKET = 'SOCKET';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +39,12 @@ const RootNavigation = () => {
           name={HEALTH}
           component={Health}
           options={{title: '가계부'}}
+        />
+        {/* test socket */}
+        <Stack.Screen
+          name={SOCKET}
+          component={Socket}
+          options={{title: '소켓'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -2,8 +2,13 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Pressable, View, Text, StyleSheet, ImageBackground} from 'react-native';
 
-import {HEALTH, LEDGER} from '../../navigations/RootNavigation';
 import Snow from '../../components/Snow';
+
+const navigationList = [
+  {name: '가계부', nav: 'LEDGER', bgColor: '#F3C892'},
+  {name: '헬스', nav: 'HEALTH', bgColor: '#CDDEFF'},
+  {name: '소켓', nav: 'SOCKET', bgColor: '#BAABDA'},
+];
 
 const Main = () => {
   const navigation = useNavigation();
@@ -14,16 +19,15 @@ const Main = () => {
       source={require('../../assets/img/img2.jpg')}>
       <Snow />
       <View style={styles.container}>
-        <Pressable
-          style={[styles.selectBox, {backgroundColor: '#F3C892'}]}
-          onPress={() => navigation.navigate(LEDGER)}>
-          <Text style={styles.selectText}>가계부</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.selectBox, {backgroundColor: '#CDDEFF'}]}
-          onPress={() => navigation.navigate(HEALTH)}>
-          <Text style={styles.selectText}>헬스</Text>
-        </Pressable>
+        {navigationList.length > 0 &&
+          navigationList.map((item, index) => (
+            <Pressable
+              key={index}
+              style={[styles.selectBox, {backgroundColor: item.bgColor}]}
+              onPress={() => navigation.navigate(item.nav)}>
+              <Text style={styles.selectText}>{item.name}</Text>
+            </Pressable>
+          ))}
       </View>
     </ImageBackground>
   );
