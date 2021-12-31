@@ -1,29 +1,22 @@
 import {useFocusEffect} from '@react-navigation/native';
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import {io} from 'socket.io-client';
 
 const index = () => {
   const [value, setValue] = useState();
-
-  const socket = io('https://shin.loca.lt');
+  const [text, setText] = useState('');
 
   const onSubmitHandler = () => {
-    socket.on('connect', () => {
-      socket.emit('ledger', value);
-    });
+    $socket.emit('ledger', value);
     setValue('');
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      socket.on('connect', () => {
-        console.log('socket.id', socket.id);
-        console.log('socket.connected', socket.connected);
-      });
-    }, []),
-  );
+  useEffect(() => {
+    $socket.on('ledger', msg => {
+      setText(msg);
+    });
+  }, []);
 
   return (
     <View>
@@ -49,6 +42,7 @@ const index = () => {
           submit
         </Text>
       </Pressable>
+      <Text style={{color: 'black'}}>{text}</Text>
     </View>
   );
 };
