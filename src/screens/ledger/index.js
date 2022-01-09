@@ -38,7 +38,7 @@ const Ledger = () => {
     let total = 0;
     for (let i = 1; i <= 40; i++) {
       let temp = await storage.getDataByDay(
-        `2021-${date}-${i < 10 ? '0' + i : i}`,
+        `${dayjs().format('YYYY')}-${date}-${i < 10 ? '0' + i : i}`,
       );
       total += Number(temp);
     }
@@ -54,7 +54,7 @@ const Ledger = () => {
       setLoading(true);
       getSum(day);
       getMonth(day.substring(5, 7));
-      if (totalSum) setLoading(false);
+      if (totalSum || totalSum === 0) setLoading(false);
     }, [day, totalSum]),
   );
 
