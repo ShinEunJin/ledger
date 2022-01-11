@@ -51,7 +51,7 @@ const RootNavigation = () => {
         <Stack.Screen
           name={GEO}
           component={Geo}
-          options={{ title: '소켓' }}
+          options={{ title: '위치' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
